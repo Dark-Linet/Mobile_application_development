@@ -1,3 +1,5 @@
+package Practical_work_1
+
 fun main()
 {
     println("=== Простой калькулятор ===")
