@@ -27,3 +27,26 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Kotlin ###
+# Compiled class files
+*.class
+
+### IntelliJ IDEA Additional ###
+# All .iml files in project
+*.iml
+modules.xml
+*.ipr
+*.iws
+workspace.xml
+
+### Build ###
+# Gradle
+.gradle/
+build/
+
+# Maven
+target/
+
+### Logs ###
+*.log
