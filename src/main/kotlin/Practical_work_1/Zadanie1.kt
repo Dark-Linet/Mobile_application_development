@@ -4,7 +4,7 @@ fun main() {
     println("Введите строку из английских символов: ")
     val stroka = readln()
 
-    var numberOfCharacters = 1
+    var numberOfCharacters = 1           // Счетчик для подсчета подряд идущих одинаковых символов
     for (i in 0 until stroka.length - 1)
     {
         if (stroka[i] == stroka[i + 1])
