@@ -1,6 +1,6 @@
 package Practical_work_2
 
-fun main() {
+fun task1() {
     // Запрашиваем размеры массива
     print("Введите количество строк: ")
     val rows = readLine()!!.toInt()

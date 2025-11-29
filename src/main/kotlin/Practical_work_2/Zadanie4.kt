@@ -1,6 +1,6 @@
 package Practical_work_2
 
-fun main() {
+fun task4() {
     // Ввод первого массива
     print("Введите первый массив (через пробел): ")
     val arr1 = readLine()!!.split(" ").map { it.toInt() }

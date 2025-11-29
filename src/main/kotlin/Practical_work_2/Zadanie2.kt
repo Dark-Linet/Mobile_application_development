@@ -1,6 +1,6 @@
 package Practical_work_2
 
-fun main() {
+fun task2() {
     // Заданная матрица 5x5
     val matrix = arrayOf(
         intArrayOf(5, 9, 6, 7, 2),

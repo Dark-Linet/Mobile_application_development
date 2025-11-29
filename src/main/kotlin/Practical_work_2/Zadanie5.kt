@@ -1,6 +1,6 @@
 package Practical_work_2
 
-fun main() {
+fun task5() {
     // Ввод слов через пробел
     print("Введите слова через пробел: ")
     val words = readLine()!!.split(" ")
