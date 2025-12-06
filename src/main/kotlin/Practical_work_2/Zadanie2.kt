@@ -36,7 +36,8 @@ fun task2() {
     }
 
     // Если матрица квадратная — проверяем симметрию
-    if (isSymmetric) {
+    if (isSymmetric)
+    {
         for (i in 0 until n)
         {
             for (j in i + 1 until n)
