@@ -6,29 +6,48 @@ fun task3() {
 
     // Строим cipherAlphabet: позиция (1-33) -> буква
     val cipherAlphabet = CharArray(33)
-    for (i in plainAlphabet.indices) {
+    for (i in plainAlphabet.indices)
+    {
         val pos = positions[i] // от 1 до 33
         cipherAlphabet[pos - 1] = plainAlphabet[i]
     }
 
     // Карта: буква -> её индекс в cipherAlphabet
     val charToIndex = mutableMapOf<Char, Int>()
-    for (i in cipherAlphabet.indices) {
+    for (i in cipherAlphabet.indices)
+    {
         charToIndex[cipherAlphabet[i]] = i
     }
 
-    // Ввод от пользователя
-    println("Выберите действие:")
-    println("1 — зашифровать")
-    println("2 — расшифровать")
-    val choice = readLine()?.trim()
-
-    print("Введите ключевое слово (только русские буквы): ")
-    val keyword = readLine()?.trim()?.uppercase() ?: ""
-    if (keyword.any { it !in plainAlphabet })
+    var choice = ""
+    while (true)
     {
-        println("Ключ содержит недопустимые символы!")
-        return
+        println("Выберите действие:")
+        println("1 — зашифровать")
+        println("2 — расшифровать")
+        choice = readLine()?.trim() ?: ""
+        if (choice in setOf("1", "2")) break
+        println("Неверный выбор! Допустимые значения: 1 или 2.\n")
+    }
+
+    // === Ввод ключевого слова ===
+    var keyword = ""
+    while (true)
+    {
+        print("Введите ключевое слово (только русские буквы): ")
+        keyword = readLine()?.trim()?.uppercase() ?: ""
+        if (keyword.isEmpty())
+        {
+            println("Ключевое слово не может быть пустым! Попробуйте снова.\n")
+            continue
+        }
+        if (keyword.all { it in plainAlphabet })
+        {
+            break
+        } else
+        {
+            println("Ключ содержит недопустимые символы! Используйте только русские буквы из алфавита.\n")
+        }
     }
 
     // Преобразуем ключ в массив сдвигов (номера из таблицы)
@@ -44,8 +63,27 @@ fun task3() {
         shifts.add(positions[idxInPlain]) // это сдвиг (от 1 до 33)
     }
 
-    print("Введите текст: ")
-    val text = readLine()?.trim()?.uppercase() ?: ""
+    // === Ввод текста (только русские буквы из plainAlphabet) ===
+    var text = ""
+    while (true)
+    {
+        print("Введите текст (только русские буквы без пробелов и знаков препинания): ")
+        text = readLine()?.trim()?.uppercase() ?: ""
+
+        if (text.isEmpty())
+        {
+            println("Текст не может быть пустым!\n")
+            continue
+        }
+
+        if (text.all { it in plainAlphabet })
+        {
+            break
+        } else
+        {
+            println("Текст содержит недопустимые символы! Разрешены только буквы: $plainAlphabet\n")
+        }
+    }
 
     val result = StringBuilder()
     var keyIndex = 0
@@ -73,13 +111,15 @@ fun task3() {
             }
             result.append(cipherAlphabet[newIndex])
             keyIndex++
-        } else {
+        } else
+        {
             // Не русская буква — оставляем как есть
             result.append(ch)
         }
     }
 
-    when (choice) {
+    when (choice)
+    {
         "1" -> println("Зашифрованный текст: $result")
         "2" -> println("Расшифрованный текст: $result")
     }
