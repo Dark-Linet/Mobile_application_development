@@ -1,7 +1,7 @@
 package Practical_work_2
 
 fun task4() {
-    var arr1: List<Int>
+    val arr1: List<Int>
     while (true)
     {
         print("Введите первый массив (целые числа через пробел): ")
@@ -37,7 +37,7 @@ fun task4() {
         }
     }
 
-    var arr2: List<Int>
+    val arr2: List<Int>
     while (true)
     {
         print("Введите второй массив (целые числа через пробел): ")
