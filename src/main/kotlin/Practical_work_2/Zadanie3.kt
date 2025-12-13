@@ -4,15 +4,13 @@ fun task3() {
     val plainAlphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ"
     val positions = intArrayOf(21,13,4,20,22,1,25,12,24,14,2,28,9,23,3,29,6,16,15,11,26,5,30,27,8,18,10,33,31,32,19,7,17)
 
-    // Строим cipherAlphabet: позиция (1-33) -> буква
     val cipherAlphabet = CharArray(33)
     for (i in plainAlphabet.indices)
     {
-        val pos = positions[i] // от 1 до 33
+        val pos = positions[i]
         cipherAlphabet[pos - 1] = plainAlphabet[i]
     }
 
-    // Карта: буква -> её индекс в cipherAlphabet
     val charToIndex = mutableMapOf<Char, Int>()
     for (i in cipherAlphabet.indices)
     {
@@ -30,7 +28,6 @@ fun task3() {
         println("Неверный выбор! Допустимые значения: 1 или 2.\n")
     }
 
-    // === Ввод ключевого слова ===
     var keyword = ""
     while (true)
     {
@@ -50,20 +47,13 @@ fun task3() {
         }
     }
 
-    // Преобразуем ключ в массив сдвигов (номера из таблицы)
     val shifts = mutableListOf<Int>()
     for (ch in keyword)
     {
         val idxInPlain = plainAlphabet.indexOf(ch)
-        if (idxInPlain == -1)
-        {
-            println("Недопустимая буква в ключе: $ch")
-            return
-        }
-        shifts.add(positions[idxInPlain]) // это сдвиг (от 1 до 33)
+        shifts.add(positions[idxInPlain])
     }
 
-    // === Ввод текста (только русские буквы из plainAlphabet) ===
     var text = ""
     while (true)
     {
@@ -104,17 +94,14 @@ fun task3() {
             {
                 "1" -> (currentIndex + shift) % 33
                 "2" -> (currentIndex - shift + 33) % 33
-                else -> {
+                else ->
+                {
                     println("Неверный выбор!")
                     return
                 }
             }
             result.append(cipherAlphabet[newIndex])
             keyIndex++
-        } else
-        {
-            // Не русская буква — оставляем как есть
-            result.append(ch)
         }
     }
 

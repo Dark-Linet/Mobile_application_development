@@ -1,34 +1,51 @@
 package Practical_work_2
 
-fun task5() {
-    // Ввод слов через пробел
-    print("Введите слова через пробел: ")
-    val words = readLine()!!.split(" ")
-
-    // Словарь: ключ — отсортированные буквы, значение — список слов из этой группы
-    val groups = mutableMapOf<String, MutableList<String>>()
-
-    // Обрабатываем каждое слово
-    for (word in words)
+    fun task5()
     {
-        // Сортируем буквы в слове и делаем из них строку-ключ
-        val key = word.lowercase().toCharArray().sorted().joinToString("")
+        var words: List<String>
 
-        // Если такой ключ уже есть — добавляем слово в существующий список
-        if (key in groups)
+        while (true)
         {
-            groups[key]!!.add(word)
-        } else
+            print("Введите слова через пробел: ")
+            val input = readLine()?.trim()
+
+            if (input.isNullOrEmpty())
+            {
+                println("Ничего не введено. Попробуйте снова.\n")
+                continue
+            }
+
+            // Разбиваем по пробелам и убираем пустые части (если были лишние пробелы)
+            words = input.split(" ")
+
+            var valid = true
+            for (word in words)
+            {
+                for (char in word)
+                {
+                    if (!char.isLetter())
+                    {
+                        println("Слово '$word' содержит не буквы. Вводите только слова!\n")
+                        valid = false
+                        break
+                    }
+                }
+                if (!valid) break
+            }
+
+            if (valid) break
+        }
+
+        val groups = mutableMapOf<String, MutableList<String>>()
+        for (word in words)
         {
-            // Иначе создаём новую группу
-            groups[key] = mutableListOf(word)
+            val key = word.lowercase().toCharArray().sorted().joinToString("")
+            groups.getOrPut(key) { mutableListOf() }.add(word)
+        }
+
+        println("\nГруппы слов из одинаковых букв:")
+        for (group in groups.values)
+        {
+            println(group)
         }
     }
-
-    // Выводим все группы
-    println("Группы слов из одинаковых букв:")
-    for (group in groups.values)
-    {
-        println(group)
-    }
-}

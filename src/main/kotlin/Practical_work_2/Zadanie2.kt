@@ -1,7 +1,6 @@
 package Practical_work_2
 
 fun task2() {
-    // Заданная матрица 5x5
     val matrix = arrayOf(
         intArrayOf(5, 9, 6, 7, 2),
         intArrayOf(9, 8, 4, 5, 3),
@@ -10,7 +9,6 @@ fun task2() {
         intArrayOf(2, 3, 7, 8, 1)
     )
 
-    // Вывод матрицы
     println("Исходная матрица:")
     for (row in matrix)
     {
@@ -21,11 +19,9 @@ fun task2() {
         println()
     }
 
-    // Проверка симметричности относительно главной диагонали
     val n = matrix.size
     var isSymmetric = true
 
-    // Проверяем, что матрица квадратная
     for (row in matrix)
     {
         if (row.size != n)
@@ -35,7 +31,6 @@ fun task2() {
         }
     }
 
-    // Если матрица квадратная — проверяем симметрию
     if (isSymmetric)
     {
         for (i in 0 until n)
